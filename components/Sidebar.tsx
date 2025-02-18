@@ -28,8 +28,8 @@ const Sidebar = () => {
         <SidebarLink text="Profile" Icon={UserIcon} />
         <SidebarLink text="More" Icon={EllipsisHorizontalCircleIcon} />
       </div>
-      <button className="hidden xl:inline ml-auto bg-[#1d9bf0] text-white rounded-full w-56 h-[52px] text-lg font-bold shadow-md hover:bg-[#1a8cd8]">
-        Tweet
+      <button className="hidden xl:inline ml-auto bg-white text-black rounded-full w-56 h-[52px] text-lg font-bold shadow-md hover:bg-[#d9d9d9]">
+        Post
       </button>
       <div className="text-[#d9d9d9] flex justify-center items-center hoverAnimation xl:ml-auto mt-auto">
         <img
