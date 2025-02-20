@@ -4,12 +4,12 @@ import { getStorage } from "firebase/storage";
 
 //web app's firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyDqZs8UhWbdbaErYQhQMnYD02QDoZjwyTk",
+  apiKey: process.env.NEXT_FIREBASE_API_KEY,
   authDomain: "x-clone-1e8d8.firebaseapp.com",
   projectId: "x-clone-1e8d8",
   storageBucket: "x-clone-1e8d8.firebasestorage.app",
   messagingSenderId: "53407241138",
-  appId: "1:53407241138:web:681c8a414ff14de755caab"
+  appId: process.env.NEXT_FIREBASE_APP_ID,
 };
 
 //initialize firebase 
