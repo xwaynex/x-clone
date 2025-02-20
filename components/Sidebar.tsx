@@ -4,7 +4,7 @@ import { HomeIcon } from "@heroicons/react/16/solid";
 import {
   BellIcon,
   EnvelopeIcon,
-  BookmarkIcon,
+  VariableIcon,
   MagnifyingGlassIcon,
   UsersIcon,
   UserIcon,
@@ -23,7 +23,7 @@ const Sidebar = () => {
         <SidebarLink text="Explore" Icon={MagnifyingGlassIcon} />
         <SidebarLink text="Notification" Icon={BellIcon} />
         <SidebarLink text="Messages" Icon={EnvelopeIcon} />
-        <SidebarLink text="Grok" Icon={BookmarkIcon} />
+        <SidebarLink text="Grok" Icon={VariableIcon} />
         <SidebarLink text="Communities" Icon={UsersIcon} />
         <SidebarLink text="Profile" Icon={UserIcon} />
         <SidebarLink text="More" Icon={EllipsisHorizontalCircleIcon} />
