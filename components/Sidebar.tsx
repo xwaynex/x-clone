@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import SidebarLink from "./SidebarLink";
 import { HomeIcon } from "@heroicons/react/16/solid";
@@ -11,8 +12,10 @@ import {
   EllipsisHorizontalCircleIcon,
   EllipsisHorizontalIcon,
 } from "@heroicons/react/24/outline";
+import { signOut, useSession } from "next-auth/react";
 
 const Sidebar = () => {
+  const { data: session } = useSession();
   return (
     <div className="hidden sm:flex flex-col items-center xl:items.start xl:w-[340px] p-2 fixed h-full">
       <div className="flex items-center justify-center w-14 h-14 hoverAnimation p-0 xl:ml-24">
@@ -31,15 +34,23 @@ const Sidebar = () => {
       <button className="hidden xl:inline ml-auto bg-white text-black rounded-full w-56 h-[52px] text-lg font-bold shadow-md hover:bg-[#d9d9d9]">
         Post
       </button>
-      <div className="text-[#d9d9d9] flex justify-center items-center hoverAnimation xl:ml-auto mt-auto">
-        <img
-          src="https://lh3.googleusercontent.com/a/ACg8ocJ97iaJQYaBIMk-3h2BPUCtPvWURb_OgNNUWQdlmU3PzHh-OA=s64-c"
-          alt=""
-          className="h-10 w-10 rounded-full xl:mr-2.5"
-        />
+      <div
+        className="text-[#d9d9d9] flex justify-center items-center hoverAnimation xl:-mr-5 xl:ml-auto mt-auto"
+        onClick={() => signOut()}
+      >
+        {session?.user?.image && (
+          <Image
+            src={session.user.image}
+            alt="User Profile"
+            width={40}
+            height={40}
+            className="h-10 w-10 rounded-full xl:mr-2.5"
+          />
+        )}
+
         <div className="hidden xl:inline leading-5">
-          <h4 className="font-bold"> shinto</h4>
-          <p className="text-[#6e767d]">@shinto44</p>
+          <h4 className="font-bold"> {session?.user?.name}</h4>
+          <p className="text-[#6e767d]">@{session?.user?.tag}</p>
         </div>
         <EllipsisHorizontalIcon className="h-5 hidden xl:inline ml-10" />
       </div>

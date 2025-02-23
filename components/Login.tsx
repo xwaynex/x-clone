@@ -19,7 +19,6 @@ export default function Login() {
         alt=""
         width={150}
         height={150}
-        objectFit="contain"
       />
       <div>
         {Object.values(providers).map((provider) => (

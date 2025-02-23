@@ -7,6 +7,7 @@ export const authOptions: NextAuthOptions = {
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+
     }),
   ],
   callbacks: {
@@ -25,6 +26,7 @@ export const authOptions: NextAuthOptions = {
     }
     
   },
+  debug: true,  // Enable debugging logs
   secret: process.env.NEXTAUTH_SECRET, // Required in production
 };
 

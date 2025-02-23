@@ -1,10 +1,4 @@
-import type { Session } from "next-auth";
-
-type WidgetProps = {
-  trendingResults: any; // Replace 'any' with actual type
-  followResults: any;
-  session: Session | null;
-};
+import { WidgetProps } from "@/app/type";
 
 export default function Widget({ trendingResults, followResults }: WidgetProps) {
   return (

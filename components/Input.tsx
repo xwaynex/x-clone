@@ -15,8 +15,11 @@ import Picker from "@emoji-mart/react";
 import { useRef, useState } from "react";
 import { db } from "@/firebaseConfig";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import { useSession } from "next-auth/react";
+import Image from "next/image";
 
 const Input = () => {
+  const { data: session } = useSession();
   const [input, setInput] = useState("");
   const [selectedFile, setSelectedFile] = useState<string | null>(null);
   const [showEmojis, setShowEmojis] = useState(false);
@@ -122,11 +125,16 @@ const Input = () => {
         isLoading && "opacity-50"
       }`}
     >
-      <img
-        src="https://lh3.googleusercontent.com/a/ACg8ocJ97iaJQYaBIMk-3h2BPUCtPvWURb_OgNNUWQdlmU3PzHh-OA=s64-c"
-        alt=""
-        className="h-11 w-11 rounded-full cursor-pointer"
-      />
+      {session?.user?.image && (
+
+        <Image
+          src={session?.user?.image}
+          alt="user profile"
+          width={40}
+          height={40}
+          className="h-11 w-11 rounded-full cursor-pointer"
+        />
+      )}
       <div className=" w-full divide-y divide-gray-700">
         <div className={`${selectedFile && "pb-7"} ${input && "space-y-2.5"}`}>
           <textarea
@@ -151,11 +159,15 @@ const Input = () => {
               >
                 <XMarkIcon className="text-white h-5" />
               </div>
-              <img
-                src={selectedFile}
-                alt=""
-                className="rounded-2xl max-h-80 object-contain overflow-hidden"
-              />
+              {session?.user?.image && (
+                <Image
+                  src={selectedFile}
+                  alt=""
+                  width={40}
+                  height={40}
+                  className="rounded-2xl max-h-80 object-contain overflow-hidden"
+                />
+              )}
             </div>
           )}
         </div>
