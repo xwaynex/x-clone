@@ -3,11 +3,11 @@ import Sidebar from "@/components/Sidebar";
 import Widget from "@/components/Widget";
 // import { getProviders} from "next-auth/react";
 import { getServerSession } from "next-auth";
-import { authOptions } from "./api/auth/[...nextauth]/route";
+// import { authOptions } from "./api/auth/[...nextauth]/route";
 import Login from "@/components/Login";
 
 export default async function Home() {
-  const session = await getServerSession(authOptions)
+  const session = await getServerSession()
 
   if (!session){
     return <Login/>
