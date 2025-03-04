@@ -91,6 +91,10 @@ const Input = () => {
 
     // 🔹 Step 4: Save post to Firestore (if applicable)
     await addDoc(collection(db, "posts"), {
+      id: session?.user?.uid,
+      username: session?.user?.name,
+      userImg: session?.user?.image,
+      tag: session?.user?.tag,
       text: input,
       imageUrl: imageUrl || null,
       timeStamp: serverTimestamp(),

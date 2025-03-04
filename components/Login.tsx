@@ -1,11 +1,11 @@
 'use client';  
 import { useState, useEffect } from "react";
-import { signIn, getProviders, LiteralUnion } from "next-auth/react";
+import { signIn, getProviders, LiteralUnion, ClientSafeProvider } from "next-auth/react";
 import { BuiltInProviderType } from "next-auth/providers/index"; 
 import Image from "next/image";
 
 export default function Login() {
-  const [providers, setProviders] = useState<Record<LiteralUnion<BuiltInProviderType, string>, any> | null>(null);
+  const [providers, setProviders] = useState<Record<LiteralUnion<BuiltInProviderType, string>, ClientSafeProvider> | null>(null);
   
   useEffect(() => {
     getProviders().then((res) => setProviders(res));
