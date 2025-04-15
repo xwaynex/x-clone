@@ -167,8 +167,8 @@ const Input = () => {
                 <Image
                   src={selectedFile}
                   alt=""
-                  width={40}
-                  height={40}
+                  width={400}
+                  height={400}
                   className="rounded-2xl max-h-80 object-contain overflow-hidden"
                 />
               )}

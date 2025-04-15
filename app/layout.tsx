@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { getServerSession } from "next-auth";
-// import { authOptions } from "./api/auth/[...nextauth]/route";
+import authOptions from "@/lib/config/auth/auth";
 import SessionProvider from "@/components/SessionProvider";
 
 // https://rb.gy/kmdjya
@@ -27,7 +27,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const session = await getServerSession();
+  const session = await getServerSession(authOptions);
 
   return (
     <html lang="en">
