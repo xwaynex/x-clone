@@ -31,3 +31,7 @@ export type PostProps = {
   id: string;
   postPage?: boolean; // optional if not always passed
 };
+
+export type Like = {
+  id: string;
+};

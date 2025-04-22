@@ -4,6 +4,7 @@ import "./globals.css";
 import { getServerSession } from "next-auth";
 import authOptions from "@/lib/config/auth/auth";
 import SessionProvider from "@/components/SessionProvider";
+import { Providers } from "@/components/provider";
 
 // https://rb.gy/kmdjya
 
@@ -35,7 +36,7 @@ export default async function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <SessionProvider session={session}>
-        {children}
+          <Providers>{children}</Providers>
         </SessionProvider>
       </body>
     </html>
