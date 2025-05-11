@@ -4,6 +4,7 @@ import Moment from "react-moment";
 
 
 const Comment = ({ id, comment } : CommentProps) => {
+  console.log(id)
   return (
     <div className="p-3 flex cursor-pointer border-b border-gray-700">
       <Image

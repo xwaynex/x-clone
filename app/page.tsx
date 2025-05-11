@@ -14,9 +14,9 @@ import { modalState } from "@/atoms/modelAtoms";
 
 export default function Home() {
   const { data: session } = useSession();
-  const [trendingResults, setTrendingResults] = useState([]);
-  const [followResults, setFollowResults] = useState([]);
-  const [isOpen, setIsOpen] = useAtom(modalState)
+  const [trendingResults] = useState([]);
+  const [followResults] = useState([]);
+  const [isOpen] = useAtom(modalState)
 
   // useEffect(() => {
   //   const fetchData = async () => {

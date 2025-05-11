@@ -3,7 +3,7 @@
 import { CommentsData, PostProps } from "@/app/type";
 import Image from "next/image";
 import {
-  AdjustmentsHorizontalIcon,
+  // AdjustmentsHorizontalIcon,
   ChartBarIcon,
   EllipsisHorizontalIcon,
   HeartIcon,
@@ -34,8 +34,8 @@ import { Like } from "@/app/type";
 
 const Post = ({ post, id, postPage }: PostProps) => {
   const { data: session } = useSession();
-  const [isOpen, setIsOpen] = useAtom(modalState);
-  const [postId, setPostId] = useAtom(postIdState);
+  const [, setIsOpen] = useAtom(modalState);
+  const [, setPostId] = useAtom(postIdState);
   const [comments, setComments] = useState<CommentsData[]>([]);
   const [likes, setLikes] = useState<Like[]>([]);
   const [liked, setLiked] = useState(false);

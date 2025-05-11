@@ -1,6 +1,6 @@
 "use client";
 import { useSession } from "next-auth/react";
-import Head from "next/head";
+// import Head from "next/head";
 import { useAtom } from "jotai";
 import Modal from "@/components/Modal";
 import Sidebar from "@/components/Sidebar";
@@ -23,7 +23,7 @@ import Comment from "@/components/Comment";
 
 const PostPage = () => {
   const { data: session } = useSession();
-  const [isOpen, setIsOpen] = useAtom(modalState);
+  const [isOpen] = useAtom(modalState);
   const router = useRouter();
   const params = useParams();
   const rawId = params?.id;

@@ -36,7 +36,7 @@ import Moment from "react-moment";
 const Modal = () => {
   const { data: session } = useSession();
   const [isOpen, setIsOpen] = useAtom(modalState);
-  const [postId, SetPostId] = useAtom(postIdState);
+  const [postId] = useAtom(postIdState);
   const [post, setPost] = useState<PostData>();
   const [comment, setComment] = useState("");
   const router = useRouter();
@@ -45,7 +45,7 @@ const Modal = () => {
     return onSnapshot(doc(db, "posts", postId), (snapshot) => {
       const data = snapshot.data();
       if (data) {
-        setPost(data as PostData); 
+        setPost(data as PostData);
       }
     });
   }, [postId]);
@@ -141,6 +141,7 @@ const Modal = () => {
                     </div>
                   </div>
 
+                  <form onSubmit={sendComment}>
                   <div className="mt-7 flex space-x-3 w-full items-start">
                     <Image
                       src={session?.user?.image || ""}
@@ -181,7 +182,7 @@ const Modal = () => {
                         <button
                           className="bg-[#1d9bf0] text-white rounded-full px-4 py-1.5 font-bold shadow-md hover:bg-[#1a8cd8] disabled:hover:bg-[#1d9bf0] disabled:opacity-50 disabled:cursor-default"
                           type="submit"
-                          onClick={sendComment}
+                          // onClick={sendComment}
                           disabled={!comment.trim()}
                         >
                           Reply
@@ -189,6 +190,7 @@ const Modal = () => {
                       </div>
                     </div>
                   </div>
+                  </form>
                 </div>
               </div>
             </DialogPanel>
