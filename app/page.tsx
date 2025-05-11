@@ -8,11 +8,15 @@ import Widget from "@/components/Widget";
 import Login from "@/components/Login";
 import { useSession } from "next-auth/react";
 import {  useState } from "react";
+import Modal from "@/components/Modal";
+import { useAtom } from "jotai";
+import { modalState } from "@/atoms/modelAtoms";
 
 export default function Home() {
   const { data: session } = useSession();
   const [trendingResults, setTrendingResults] = useState([]);
   const [followResults, setFollowResults] = useState([]);
+  const [isOpen, setIsOpen] = useAtom(modalState)
 
   // useEffect(() => {
   //   const fetchData = async () => {
@@ -52,6 +56,7 @@ export default function Home() {
             followResults={followResults}
             session={session}
           />
+          {isOpen && <Modal />}
         </main>
       </div>
   );

@@ -1,15 +1,16 @@
 "use client";
 
-import { PostProps } from "@/app/type";
+import { CommentsData, PostProps } from "@/app/type";
 import Image from "next/image";
 import {
   AdjustmentsHorizontalIcon,
   ChartBarIcon,
-  ChatBubbleLeftEllipsisIcon,
   EllipsisHorizontalIcon,
   HeartIcon,
   ShareIcon,
   TrashIcon,
+  ArrowPathRoundedSquareIcon,
+  ChatBubbleLeftIcon,
 } from "@heroicons/react/24/outline";
 import { HeartIcon as HeartIconFill } from "@heroicons/react/16/solid";
 import { useSession } from "next-auth/react";
@@ -24,6 +25,8 @@ import {
   deleteDoc,
   doc,
   onSnapshot,
+  orderBy,
+  query,
   setDoc,
 } from "firebase/firestore";
 import { db } from "@/firebaseConfig";
@@ -33,10 +36,26 @@ const Post = ({ post, id, postPage }: PostProps) => {
   const { data: session } = useSession();
   const [isOpen, setIsOpen] = useAtom(modalState);
   const [postId, setPostId] = useAtom(postIdState);
-  const [comments, setComments] = useState([]);
+  const [comments, setComments] = useState<CommentsData[]>([]);
   const [likes, setLikes] = useState<Like[]>([]);
   const [liked, setLiked] = useState(false);
   const router = useRouter();
+
+  useEffect(
+    () => {
+      const unsubscribe = onSnapshot(
+        query(
+          collection(db, "posts", id, "comments"),
+          orderBy("timestamp", "desc")
+        ),
+        (snapshot) => {
+          const commentsData = snapshot.docs.map((doc) => doc.data() as CommentsData);
+          setComments(commentsData);
+        }
+      )
+
+      return () => unsubscribe();
+    }, [id]);
 
   useEffect(
     () =>
@@ -166,7 +185,7 @@ const Post = ({ post, id, postPage }: PostProps) => {
             }}
           >
             <div className="icon group-hover:bg-[#1d9bf0] group-hover:bg-opacity-10">
-              <ChatBubbleLeftEllipsisIcon className="h-5 group-hover:text-[#1d9bf0]" />
+              <ChatBubbleLeftIcon className="h-5 group-hover:text-[#1d9bf0]" />
             </div>
             {comments.length > 0 && (
               <span className="group-hover:text-[#1d9bf0] text-sm">
@@ -191,7 +210,7 @@ const Post = ({ post, id, postPage }: PostProps) => {
           ) : (
             <div className="flex items-center space-x-1 group">
               <div className="icon group-hover:bg-green-500/10">
-                <AdjustmentsHorizontalIcon className="h-5 group-hover:text-green-500" />
+                <ArrowPathRoundedSquareIcon className="h-5 group-hover:text-green-500" />
               </div>
             </div>
           )}
