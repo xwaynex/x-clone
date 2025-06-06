@@ -15,11 +15,12 @@ import {
   query,
 } from "firebase/firestore";
 import { db } from "@/firebaseConfig";
-import { CommentsData, PostData } from "../type";
+import { CommentsData, FollowItem, PostData, TrendingItem } from "../type";
 import Login from "@/components/Login";
 import { ArrowLeftIcon } from "@heroicons/react/24/outline";
 import Post from "@/components/Post";
 import Comment from "@/components/Comment";
+import Widget from "@/components/Widget";
 
 const PostPage = () => {
   const { data: session } = useSession();
@@ -29,6 +30,9 @@ const PostPage = () => {
   const rawId = params?.id;
   const id = Array.isArray(rawId) ? rawId[0] : rawId;
   const [post, setPost] = useState<PostData>();
+
+  const [trending, setTrending] = useState<TrendingItem[]>([]);
+  const [whoToFollow, setWhoToFollow] = useState<FollowItem[]>([]);
 
   const [comments, setComments] = useState<CommentsData[]>([]);
 
@@ -52,12 +56,10 @@ const PostPage = () => {
         orderBy("timestamp", "desc")
       ),
       (snapshot) => {
-        const commentsData = snapshot.docs.map(
-          (doc) => ({
-            id: doc.id, 
-            ...(doc.data() as Omit<CommentsData, "id">),
-          })
-        );
+        const commentsData = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...(doc.data() as Omit<CommentsData, "id">),
+        }));
         setComments(commentsData);
       }
     );
@@ -69,6 +71,16 @@ const PostPage = () => {
       document.title = `${post.username} on X: "${post.text}"`;
     }
   }, [post]);
+
+  useEffect(() => {
+    fetch("/api/widget-data")
+      .then((res) => res.json())
+      .then(({ trending, whoToFollow }) => {
+        setTrending(trending);
+        setWhoToFollow(whoToFollow);
+      })
+      .catch(console.error);
+  }, []);
 
   if (!session) return <Login />;
 
@@ -94,13 +106,17 @@ const PostPage = () => {
 
           {comments.length > 0 && (
             <div className="pb-72">
-            {comments.map((comment) => (
+              {comments.map((comment) => (
                 <Comment key={comment.id} id={comment.id} comment={comment} />
               ))}
             </div>
           )}
         </div>
-        {/* widget */}
+        <Widget
+          trendingResults={trending}
+          followResults={whoToFollow}
+          session={session}
+        />
         {isOpen && <Modal />}
       </main>
     </div>

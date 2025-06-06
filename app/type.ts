@@ -8,10 +8,27 @@ export interface SidebarLinkProps {
 }
 
 export interface WidgetProps {
-  trendingResults: unknown;
-  followResults: unknown;
+  trendingResults: TrendingItem[];
+  followResults: FollowItem[];
   session: Session | null;
 }
+
+export interface TrendingItem {
+  title: string;
+  topic: string;
+  type: string;
+  posts_count: number;
+  img: string;
+  // other fields…
+}
+
+export interface FollowItem {
+  name: string;
+  handle: string;
+  userImg: string;
+  // other fields…
+}
+
 
 export interface PostData {
   id: string;
