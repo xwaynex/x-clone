@@ -4,7 +4,7 @@ export async function GET() {
   // Fetch both JSONKeeper URLs server‑side
   const [trendRes, followRes] = await Promise.all([
     fetch('https://www.jsonkeeper.com/b/BFYM'),
-    fetch('https://www.jsonkeeper.com/b/KWME'),
+    fetch('https://www.jsonkeeper.com/b/I1X5'),
   ]);
 
   const [trendJson, followJson] = await Promise.all([

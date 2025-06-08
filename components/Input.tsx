@@ -145,7 +145,7 @@ const Input = () => {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             rows={2}
-            placeholder="What is happening?!"
+            placeholder="What's happening?"
             className="bg-transparent outline-none text-[#d9d9d9] text-lg placeholder-gray-500 tracking-wide w-full min-h-[50px]"
           />
           {selectedFile && (
