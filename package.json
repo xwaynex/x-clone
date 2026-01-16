@@ -19,7 +19,7 @@
     "jotai": "^2.12.3",
     "jotai-recoil-adapter": "^0.4.0",
     "moment": "^2.30.1",
-    "next": "15.1.7",
+    "next": "15.1.11",
     "next-auth": "^4.24.11",
     "next-cloudinary": "^6.16.0",
     "react": "^18.2.0",
