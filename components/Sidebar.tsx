@@ -7,7 +7,7 @@ import {
   EnvelopeIcon,
   VariableIcon,
   MagnifyingGlassIcon,
-  UsersIcon,
+  // UsersIcon,
   UserIcon,
   EllipsisHorizontalCircleIcon,
   EllipsisHorizontalIcon,
@@ -16,20 +16,19 @@ import { signOut, useSession } from "next-auth/react";
 
 const Sidebar = () => {
   const { data: session } = useSession();
-  // console.log("Session", session)
-  
+
   return (
     <div className="hidden sm:flex flex-col items-center xl:items.start xl:w-[340px] p-2 fixed h-full">
-      <div className="flex items-center justify-center w-14 h-14 hoverAnimation p-0 xl:ml-24">
-        <Image src="https://rb.gy/vy3ia4" alt="logo" width={30} height={30} />
-      </div>
-      <div className="space-y-2.5 mt-4 mb-2.5 xl:ml-24">
+      <div className="space-y-2.5 mb-2.5">
+        <div className="flex items-center justify-center w-14 h-14 hoverAnimation p-0">
+          <Image src="https://rb.gy/vy3ia4" alt="logo" width={50} height={50} />
+        </div>
         <SidebarLink text="Home" Icon={HomeIcon} active />
         <SidebarLink text="Explore" Icon={MagnifyingGlassIcon} />
-        <SidebarLink text="Notification" Icon={BellIcon} />
+        <SidebarLink text="Notifications" Icon={BellIcon} />
         <SidebarLink text="Messages" Icon={EnvelopeIcon} />
         <SidebarLink text="Grok" Icon={VariableIcon} />
-        <SidebarLink text="Communities" Icon={UsersIcon} />
+        {/* <SidebarLink text="Communities" Icon={UsersIcon} /> */}
         <SidebarLink text="Profile" Icon={UserIcon} />
         <SidebarLink text="More" Icon={EllipsisHorizontalCircleIcon} />
       </div>
